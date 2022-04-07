@@ -86,6 +86,7 @@ export class AddtocartComponent implements OnInit {
     });
   }
 
+  //decrement & update item quantity
   dec(item){
     console.log(item._id);
     if(item.qty>0){
@@ -112,6 +113,7 @@ export class AddtocartComponent implements OnInit {
 
   }
 
+  //increment & update item quantity
   inc(item){
     // console.log(item.qty);
     console.log(item._id);
