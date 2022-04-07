@@ -1,0 +1,26 @@
+<app-header></app-header>
+<div class="container mt-5">
+  <h4> Add User </h4>
+  <form [formGroup]="userForm" (ngSubmit)="userForm.valid && submit()" novalidate enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="userName"> User Name </label>
+      <input id="userName" type="text" name="userName" class="form-control" formControlName="userName" >
+    </div>
+    <div class="form-group">
+      <label for="email"> Email </label>
+      <input id="email" type="email" name="email" class="form-control" formControlName="email" >
+    </div>
+    <div class="form-group">
+      <label for="password"> Password </label>
+      <input id="password" type="password" name="password" class="form-control" formControlName="password">
+    </div>
+    <pre></pre>
+    <div>
+      <button class="btn btn-primary" type="submit" [disabled]="userForm.invalid">Submit</button>
+      <button class="btn btn-secondary m-2" type="reset">Cancel</button>
+    </div>
+
+  </form>
+
+</div>
+

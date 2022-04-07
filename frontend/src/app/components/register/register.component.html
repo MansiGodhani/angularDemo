@@ -1,0 +1,38 @@
+<div class="container mt-5">
+  <h2>Register</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="registerForm.valid && submit()" novalidate>
+    <div class="alert alert-danger" *ngIf="isSignUpFailed">
+      Email Already Exist!
+    </div>
+    <div class="form-group">
+      <label for="userName"> User Name </label>
+      <input id="userName" type="text" name="userName" class="form-control" formControlName="userName" >
+    </div>
+    <div class="form-group">
+      <label for="email"> Email </label>
+      <input id="email" type="email" name="email" class="form-control" formControlName="email" required>
+<!--      <div *ngIf="!emailError.valid && (emailError.dirty ||emailError.touched)">-->
+<!--        <div [hidden]="!emailError.errors['required']" class="alert alert-danger">-->
+<!--          Email is Required-->
+<!--        </div>-->
+<!--        <div [hidden]="!emailError.errors['email']" class="alert alert-danger">-->
+<!--          Email Not Proper-->
+<!--        </div>-->
+<!--      </div>-->
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input id="password" type="password" name="password" class="form-control" formControlName="password">
+    </div>
+    <pre></pre>
+    <div>
+      <button class="btn btn-primary" type="submit" [disabled]="registerForm.invalid">Submit</button>
+      <button class="btn btn-secondary m-2" type="reset">Cancel</button>
+    </div>
+    <div>
+      <p> Have An Account? <a routerLink="/login" routerLinkActive="active">Login</a></p>
+    </div>
+  </form>
+</div>
+
+

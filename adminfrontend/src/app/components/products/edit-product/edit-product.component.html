@@ -1,0 +1,38 @@
+<app-header></app-header>
+<div class="container mt-5">
+  <h4> Add Product </h4>
+  <form [formGroup]="productForm" (ngSubmit)="productForm.valid && submit()" enctype="multipart/form-data" >
+    <!--    <input  type="hidden" value="id" formControlName="id" >-->
+    <div class="form-group">
+      <label for="productName"> Product Name </label>
+      <input id="productName" type="text" name="productName"  class="form-control" formControlName="productName" required="">
+    </div>
+    <div class="form-group">
+      <label for="image"> Product Image </label>
+      <div *ngIf="!imageFile" >
+        <div *ngIf="imgPath">
+          <img [src]= "'http://localhost:3000/' + imgPath" width="200px" [alt]="imgPath">
+        </div>
+      </div>
+      <div>
+        <img [src]="imageFile" *ngIf="imageFile" width="200px" [alt]="imageName" />
+      </div>
+      <div class="mt-2">
+        <input id="image" type="file" name="image"  class="form-control" (change)="imageChange($event)" >
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="price"> Price</label>
+      <input id="price" type="text" name="price" class="form-control" formControlName="price">
+    </div>
+    <pre></pre>
+    <div>
+      <button class="btn btn-primary" type="submit" [disabled]="productForm.invalid">Submit</button>
+      <button class="btn btn-secondary m-2" type="reset">Cancel</button>
+    </div>
+  </form>
+</div>
+
+
+
+

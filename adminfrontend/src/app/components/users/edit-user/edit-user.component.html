@@ -1,0 +1,19 @@
+<app-header> </app-header>
+<div class="container mt-4">
+  <h2>Edit Your Details</h2>
+  <form [formGroup]="editForm" (ngSubmit)="submit()" >
+<!--    <input  type="hidden" value="id" formControlName="id" >-->
+    <div class="form-group">
+      <label for="userName">User Name</label>
+      <input id="userName" type="text" name="userName"  class="form-control" formControlName="userName" >
+    </div>
+    <div class="form-group">
+      <label for="email"> Email </label>
+      <input id="email" type="email" name="email" class="form-control" formControlName="email" >
+    </div>
+    <pre></pre>
+    <div>
+      <button class="btn btn-primary" type="submit">Update</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,52 @@
+<app-header></app-header>
+
+<div class="container mt-5">
+  <div class="d-flex">
+    <h4 class="m-auto">Products Details</h4>
+    <div class="d-flex">
+      <button class="btn btn-primary float-end" routerLink="add" routerLinkActive="active">Add Product</button>
+    </div>
+  </div>
+
+  <table class="table mt-3">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col"> Product Name </th>
+      <th scope="col"> Image </th>
+      <th scope="col"> Price </th>
+      <th scope="col" colspan="2"> Action </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let product of products; let i= index;">
+      <th scope="row">{{ i+1 }}</th>
+      <td> {{ product?.productName }} </td>
+<!--      <td> {{ product.image}} </td>-->
+      <td class= "post-image">
+        <img [src]= "'http://localhost:3000/' + product.image" [alt]= "product.productName">
+      </td>
+      <td> {{ product.price }} </td>
+      <td><button class="btn btn-warning" (click)="updateProduct(product._id)">Edit</button></td>
+      <td> <button class="btn btn-danger" (click)="deleteProduct(content, product._id)"> Delete </button> </td>
+    </tr>
+    </tbody>
+  </table>
+</div><!--Using delete confirmation popup model -->
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure to delete this?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger " (click)="c('yes')">Delete</button>
+    <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Cancel</button>
+  </div>
+</ng-template>
+
+

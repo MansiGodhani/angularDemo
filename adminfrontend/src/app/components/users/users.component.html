@@ -1,0 +1,60 @@
+<app-header></app-header>
+<!--  users details-->
+<div class="container mt-5">
+  <div class="d-flex">
+    <h4 class="m-auto">Users Details</h4>
+          <div class="d-flex">
+            <button class="btn btn-primary float-end" routerLink="addUser" routerLinkActive="active">Add User</button>
+          </div>
+  </div>
+  <table class="table mt-3">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col"> User Name </th>
+      <th scope="col"> Email </th>
+      <th scope="col"> Role </th>
+      <th scope="col"> Created Date </th>
+      <th scope="col"> Last Login time </th>
+      <th scope="col"> Last Log Out time </th>
+      <th scope="col"> Status </th>
+      <th scope="col" colspan="2"> Actions </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let list of userList; let i= index;">
+      <th scope="row">{{ i+1 }}</th>
+      <td> {{ list.userName }} </td>
+      <td> {{ list.email}} </td>
+      <td> {{ list.isRole }} </td>
+      <td> {{ list.created_at | date:'medium' }} </td>
+      <td> {{ list.lastLogin | date:'medium' }} </td>
+      <td> {{ list.lastLogout | date:'medium' }} </td>
+      <td *ngIf="list.isActive==false"><button class="btn btn-secondary">In Active</button> </td>
+      <td *ngIf="list.isActive==true"><button class="btn btn-success">Active </button></td>
+      <!--      <td *ngIf="isNotActive"><button class="btn btn-secondary">In Active</button> </td>-->
+      <!--      <td *ngIf="istureactive"><button class="btn btn-success">Active </button></td>-->
+      <td><button class="btn btn-warning" (click)="editUser(list._id)">Edit</button></td>
+      <td> <button class="btn btn-danger" (click)="deleteUser(content, list._id)"> Delete </button> </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<!--Using delete confirmation popup model -->
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure to delete this?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-danger " (click)="c('yes')">Delete</button>
+    <button type="button" class="btn btn-outline-dark" (click)="d('Cross click')">Cancel</button>
+  </div>
+</ng-template>
+
+

@@ -1,0 +1,36 @@
+<div class="container mt-5">
+  <h2>Login</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="loginForm.valid && submit()" >
+    <div class="alert alert-danger" *ngIf="isSignUpFailed">
+      Invalid Email and Password!<br />
+      <!--      {{ errorMessage }}-->
+    </div>
+    <div class="form-group">
+      <label for="email"> Email </label>
+      <input id="email" type="email" name="email" class="form-control" formControlName="email" >
+      <!--      <div *ngIf="!email.valid && (email.dirty ||email.touched)">-->
+      <!--        <div [hidden]="!email.errors['required']" class="alert alert-danger">-->
+      <!--          Email is Required-->
+      <!--        </div>-->
+      <!--        <div [hidden]="!email.errors['email']" class="alert alert-danger">-->
+      <!--          Email Not Proper-->
+      <!--        </div>-->
+      <!--      </div>-->
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input id="password" type="password" name="password" class="form-control" formControlName="password">
+    </div>
+    <pre></pre>
+    <div class="float-right">
+      <p><a routerLinkActive="active" routerLink="/forgot-password"> Forgot Password? </a></p>
+    </div>
+    <div>
+      <button class="btn btn-primary" type="submit" [disabled]="loginForm.invalid">Submit</button>
+      <button class="btn btn-secondary m-2" type="reset">Cancel</button>
+    </div>
+  </form>
+  <div>
+    <p>Not Register Account? <a routerLink="/register" routerLinkActive="active"> Register </a></p>
+  </div>
+</div>

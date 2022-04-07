@@ -1,0 +1,73 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/admin">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/admin">Home</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" routerLink="/admin/users" routerLinkActive="active">Users</a>
+      </li>
+      <!--      <li class="nav-item">-->
+      <!--        <a class="nav-link" routerLink="/profile" routerLinkActive="active"> Profile </a>-->
+      <!--      </li>-->
+      <!--      <li class="nav-item">-->
+      <!--        <a class="nav-link" routerLink="/contactus" routerLinkActive="active"> Contact Us </a>-->
+      <!--      </li>-->
+<!--      <li class="nav-item dropdown">-->
+<!--                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                  Setting-->
+<!--                </a>-->
+<!--        <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+<!--          <a class="dropdown-item" routerLinkActive="active" routerLink="/users/setting"> Change Password </a>-->
+<!--          <div class="dropdown-divider"></div>-->
+<!--          <a class="dropdown-item" (click)="logout()">Log Out</a>-->
+<!--        </div>-->
+<!--      </li>-->
+    </ul>
+  </div>
+</nav>
+<!--  users details-->
+<div class="container mt-5">
+  <div class="d-flex">
+    <h4 class="m-auto">Users Details</h4>
+    <!--      <div class="d-flex">-->
+    <!--        <button class="btn btn-primary float-end" routerLink="/products/add" routerLinkActive="active">Add User</button>-->
+    <!--      </div>-->
+  </div>
+  <table class="table mt-3">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col"> User Name </th>
+      <th scope="col"> Email </th>
+      <th scope="col"> Role </th>
+      <th scope="col"> Created Date </th>
+      <th scope="col"> Last Login time </th>
+      <th scope="col"> Last Log Out time </th>
+      <th scope="col"> Status </th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let list of userList; let i= index;">
+      <th scope="row">{{ i+1 }}</th>
+      <td> {{ list.userName }} </td>
+      <td> {{ list.email}} </td>
+      <td> {{ list.isRole }} </td>
+      <td> {{ list.created_at | date:'medium' }} </td>
+      <td> {{ list.lastLogin | date:'medium' }} </td>
+      <td> {{ list.lastLogout | date:'medium' }} </td>
+
+      <td *ngIf="list.isActive==false"><button class="btn btn-secondary">In Active</button> </td>
+      <td *ngIf="list.isActive==true"><button class="btn btn-success">Active </button></td>
+<!--      <td *ngIf="isNotActive"><button class="btn btn-secondary">In Active</button> </td>-->
+<!--      <td *ngIf="istureactive"><button class="btn btn-success">Active </button></td>-->
+      <!--        <td> <button class="btn btn-danger" (click)="deleteProduct(content, product._id)"> Delete </button> </td>-->
+    </tr>
+    </tbody>
+  </table>
+</div>

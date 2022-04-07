@@ -1,0 +1,54 @@
+<app-header></app-header>
+<section class="pt-3">
+  <div class="container">
+    <h2> Admin Dashboard </h2>
+    <h3>Welcome, {{admin?.userName}}</h3>
+    <p> Your Email is : {{admin?.email}}</p>
+    <div>
+      <button class="btn btn-danger" (click)="logout()">Log Out</button>
+    </div>
+
+    <div class="container mt-3">
+      <h3>User Details</h3>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="counter">
+            <h2 class="count-user text-center" >{{totalUser}}</h2>
+            <p class="count-text">Total Users</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="counter">
+            <h2 class="count-user text-center" >{{totalActiveUser}}</h2>
+            <p class="count-text ">Total Active Users</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="counter">
+            <h2 class="count-user text-center" >{{totalInActiveUser}}</h2>
+            <p class="count-text ">Total In-Active Users</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-3">
+      <h3>Product Details</h3>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="counter">
+            <h2 class="count-user text-center" >{{totalProducts}}</h2>
+            <p class="count-text">Total Products</p>
+          </div>
+        </div>
+<!--        <div class="col-md-4">-->
+<!--          <div class="counter">-->
+<!--            <h2 class="count-user text-center" >{{totalActiveUser}}</h2>-->
+<!--            <p class="count-text ">Total Active Users</p>-->
+<!--          </div>-->
+<!--        </div>-->
+      </div>
+    </div>
+
+  </div>
+</section>
