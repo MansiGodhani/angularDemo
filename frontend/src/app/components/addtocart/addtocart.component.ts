@@ -17,7 +17,6 @@ export class AddtocartComponent implements OnInit {
   shippingCharge=50.00;
   discount:number=0;
   savedMoney:number=0;
-  qty:number=1;
 
   constructor( private modalService:NgbModal,private cartService: CartService, private router:Router ) { }
 
