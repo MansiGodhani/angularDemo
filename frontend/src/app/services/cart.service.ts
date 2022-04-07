@@ -27,6 +27,10 @@ export class CartService {
     return this.http.delete(baseUrl + `api/carts/delete/${id}`);
   }
 
+  editCartItem(id,item) {
+    return this.http.put(baseUrl + `api/carts/editCart/${id}`,item);
+  }
+
 
   // getTotalPrice():number{
   //   let total = 0;

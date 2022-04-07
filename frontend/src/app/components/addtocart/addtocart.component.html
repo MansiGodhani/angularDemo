@@ -22,13 +22,15 @@
                       <h5 class="text-muted">{{item.productId.productName}}</h5>
                     </div>
                     <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                      <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+<!--                      <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepDown()">-->
+                      <button class="btn btn-link px-2" (click)="dec(item)">
                         <i class="fa fa-minus"></i>
                       </button>
-                      <input id="form1" min="0" name="quantity" [value]="item.qty" type="number" class="form-control form-control-sm" />
+                      <input min="0" name="quantity" [value]="item.qty" type="number" class="form-control form-control-sm" />
                       <p></p>
-                      <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                        <i class="fa fa-plus"></i>
+<!--                      <button class="btn btn-link px-2" onclick="this.parentNode.querySelector('input[type=number]').stepUp()">-->
+                      <button class="btn btn-link px-2" (click)="inc(item)">
+                       <i class="fa fa-plus"></i>
                       </button>
                     </div>
 

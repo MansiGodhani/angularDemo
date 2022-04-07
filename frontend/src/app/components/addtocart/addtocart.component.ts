@@ -17,6 +17,7 @@ export class AddtocartComponent implements OnInit {
   shippingCharge=50.00;
   discount:number=0;
   savedMoney:number=0;
+  qty:number=1;
 
   constructor( private modalService:NgbModal,private cartService: CartService, private router:Router ) { }
 
@@ -64,7 +65,7 @@ export class AddtocartComponent implements OnInit {
         console.log('remove',res,id);
         // window.location.reload();
         this.products = this.products.filter(item => !(item._id == id))
-        console.log(this.products)
+        console.log(this.products);
         this.grandTotal = 0;
         this.discount=0;
         this.totalItem = this.products['length'];
@@ -86,5 +87,53 @@ export class AddtocartComponent implements OnInit {
     });
   }
 
+  dec(item){
+    console.log(item._id);
+    if(item.qty>0){
+      item.qty -=1;
+    }
+    this.cartService.editCartItem(item._id,item).subscribe(res=>{
+      console.log(res);
+      this.grandTotal = 0;
+      this.discount=0;
+      this.totalItem = this.products['length'];
+      for(let i=0; i< this.products.length;i++){
+        this.grandTotal += parseInt(this.products[i].productId.price) * this.products[i].qty;
+      }
 
+      this.discount = (this.grandTotal *10) / 100;
+      if(this.grandTotal>0){
+        this.cartTotal = this.grandTotal - this.discount + this.shippingCharge;
+        this.savedMoney = this.grandTotal - this.cartTotal;
+        if(this.savedMoney < 0){
+          this.savedMoney = 0;
+        }
+      }
+    });
+
+  }
+
+  inc(item){
+    // console.log(item.qty);
+    console.log(item._id);
+    item.qty +=1;
+    this.cartService.editCartItem(item._id,item).subscribe(res=>{
+      console.log(res);
+      this.grandTotal = 0;
+      this.discount=0;
+      this.totalItem = this.products['length'];
+      for(let i=0; i< this.products.length;i++){
+        this.grandTotal += parseInt(this.products[i].productId.price) * this.products[i].qty;
+      }
+
+      this.discount = (this.grandTotal *10) / 100;
+      if(this.grandTotal>0){
+        this.cartTotal = this.grandTotal - this.discount + this.shippingCharge;
+        this.savedMoney = this.grandTotal - this.cartTotal;
+        if(this.savedMoney < 0){
+          this.savedMoney = 0;
+        }
+      }
+    })
+  }
 }

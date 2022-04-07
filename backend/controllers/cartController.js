@@ -18,8 +18,20 @@ exports.add = async (req, res) => {
 exports.editCart = async (req, res) => {
     console.log(res);
     try{
-        const updatedCart = await cartModel.findByAndUpdate(req.params.id,{$set:req.body}, { new:true });
-        res.status(200).json(updatedCart);
+        const id = req.params.id;
+        console.log(id);
+
+        cartModel.findByIdAndUpdate(id, req.body, (err) => {
+            if(err){
+                res.send({status: 500, message:'Unable to Update User' });
+            }
+            else{
+                // res.status(200).json();
+                res.send({status: 200, message:'Update user successfully'});
+            }
+        });
+        // const updatedCart = await cartModel.findByAndUpdate(req.params.id);
+        // res.status(200).json(updatedCart);
     } catch (err){
         res.status(500).json(err);
     }
