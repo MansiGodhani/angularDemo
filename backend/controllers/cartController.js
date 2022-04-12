@@ -19,8 +19,7 @@ exports.editCart = async (req, res) => {
     console.log(res);
     try{
         const id = req.params.id;
-        console.log(id);
-
+        // console.log(id);
         cartModel.findByIdAndUpdate(id, req.body, (err) => {
             if(err){
                 res.send({status: 500, message:'Unable to Update User' });
@@ -47,6 +46,17 @@ exports.deleteCart = async (req, res) => {
     }
 }
 
+/* DELETE cart all item which user login*/
+exports.emptyCart = async (req, res) => {
+    try{
+        const carts = await cartModel.deleteMany({userId: req.params.id}).populate('productId');
+        console.log(carts);
+        res.status(200).json(carts);
+        } catch (err) {
+        res.status(500).json(err);
+    }
+}
+
 /* GET All */
 exports.getAll = async (req, res) => {
     try{
@@ -57,15 +67,4 @@ exports.getAll = async (req, res) => {
         res.status(500).json(err);
     }
 }
-
-
-// /* GET  user cart */
-// exports.userId = async (req, res) => {
-//     try{
-//         const cart = await cartModel.findOne(req.params.id);
-//         res.status(200).json(cart);
-//     } catch (err){
-//         res.status(500).json(err);
-//     }
-// }
 

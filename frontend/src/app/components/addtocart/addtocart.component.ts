@@ -17,11 +17,56 @@ export class AddtocartComponent implements OnInit {
   shippingCharge=50.00;
   discount:number=0;
   savedMoney:number=0;
+  paymentHandler: any = null;
+  paymentMsg: boolean=false;
 
   constructor( private modalService:NgbModal,private cartService: CartService, private router:Router ) { }
 
   ngOnInit(): void {
     this.getCartItem();
+    this.invokeStripe();
+  }
+
+  makePayment(amount: any) {
+    const paymentHandler = (<any>window).StripeCheckout.configure({
+      key: 'pk_test_51KnHLxSHb8jy5iNwmH7oDbhblooOCmMRKa36eO3ETISQuinUtk0G5gB4DprBya4uIy4KidRoDxEdjeqfMJ6258CA00Ynyibl6z',
+      locale: 'auto',
+      token: (stripeToken: any) => {
+        console.log(stripeToken);
+        if(stripeToken){
+          this.emptyCart();
+          // alert('Payment Successfully.');
+          this.paymentMsg = true;
+        }
+      },
+    });
+    paymentHandler.open({
+      name: 'Check Out',
+      description: this.totalItem + 'items',
+      amount: amount * 100,
+      address_city:'India',
+      email: (JSON.parse(atob(localStorage.getItem('accessToken').split('.')[1]))).email,
+    });
+  }
+
+  invokeStripe() {
+    if (!window.document.getElementById('stripe-script')) {
+      const script = window.document.createElement('script');
+      script.id = 'stripe-script';
+      script.type = 'text/javascript';
+      script.src = 'https://checkout.stripe.com/checkout.js';
+      script.onload = () => {
+        this.paymentHandler = (<any>window).StripeCheckout.configure({
+          key: 'pk_test_51KnHLxSHb8jy5iNwmH7oDbhblooOCmMRKa36eO3ETISQuinUtk0G5gB4DprBya4uIy4KidRoDxEdjeqfMJ6258CA00Ynyibl6z',
+          locale: 'auto',
+          token: (stripeToken: any) => {
+            console.log(stripeToken);
+            alert('Payment has been SuccessFull!');
+          },
+        });
+      };
+      window.document.body.appendChild(script);
+    }
   }
 
   getDetails(){
@@ -29,7 +74,6 @@ export class AddtocartComponent implements OnInit {
     this.cartService.getProducts(userId).subscribe(res=> {
       this.products = res;
       console.log('this product', this.products);
-      // this.totalItem = res['length'];
     });
     }
 
@@ -55,6 +99,18 @@ export class AddtocartComponent implements OnInit {
     });
   }
 
+  emptyCart(){
+    const userId = (JSON.parse(atob(localStorage.getItem('accessToken').split('.')[1])))._id;
+    this.cartService.emptyCart(userId).subscribe(res=> {
+      console.log('delete all items',res);
+      this.getDetails();
+      this.totalItem = res['length'];
+      this.grandTotal = 0;
+      this.discount=0;
+      this.cartTotal=0;
+    });
+  };
+
   removeCartItem(content,id){
     // console.log('content',content);
     this.modalService.open(content).result.then((result) => {
@@ -73,7 +129,9 @@ export class AddtocartComponent implements OnInit {
         }
 
         this.discount = (this.grandTotal *10) / 100;
+        this.cartTotal=0;
         if(this.grandTotal>0){
+
           this.cartTotal = this.grandTotal - this.discount + this.shippingCharge;
           this.savedMoney = this.grandTotal - this.cartTotal;
           if(this.savedMoney < 0){
@@ -88,12 +146,12 @@ export class AddtocartComponent implements OnInit {
 
   //decrement & update item quantity
   dec(item){
-    console.log(item._id);
-    if(item.qty>0){
+    // console.log(item.qty);
+    if(item.qty>1){
       item.qty -=1;
     }
     this.cartService.editCartItem(item._id,item).subscribe(res=>{
-      console.log(res);
+      // console.log(res);
       this.grandTotal = 0;
       this.discount=0;
       this.totalItem = this.products['length'];
@@ -116,10 +174,10 @@ export class AddtocartComponent implements OnInit {
   //increment & update item quantity
   inc(item){
     // console.log(item.qty);
-    console.log(item._id);
-    item.qty +=1;
+    // console.log(item._id);
+    item.qty += 1;
     this.cartService.editCartItem(item._id,item).subscribe(res=>{
-      console.log(res);
+      // console.log(res);
       this.grandTotal = 0;
       this.discount=0;
       this.totalItem = this.products['length'];

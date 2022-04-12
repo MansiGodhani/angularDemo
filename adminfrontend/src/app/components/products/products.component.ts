@@ -52,5 +52,4 @@ export class ProductsComponent implements OnInit {
       console.log('Error', err);
     });
   }
-
 }
