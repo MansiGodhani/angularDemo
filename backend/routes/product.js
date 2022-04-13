@@ -51,7 +51,7 @@ router.put('/editProduct/:id',upload.single('image'), productController.editProd
 /*GET product id */
 router.get('/id/:id', productController.getId);
 
-/* GET Count products. */
+/* GET Count products.*/
 router.get('/totalProducts', productController.countAllProducts);
 
 /* POST add-to-cart*/

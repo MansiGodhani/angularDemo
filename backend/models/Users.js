@@ -31,6 +31,10 @@ const userSchema = mongoose.Schema({
             type: Boolean,
             default:false
         },
+        profileImg:{
+            type: String,
+            default: "uploads/downloads.png"
+        }
     }, { timestamps:{
             createdAt: 'created_at',
             updatedAt: 'updated_at'

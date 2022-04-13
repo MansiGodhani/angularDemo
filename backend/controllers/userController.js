@@ -56,6 +56,7 @@ exports.addUser = async (req, res) => {
 exports.editUser =  (req,res) => {
     console.log('update');
     const id = req.params.id;
+
     console.log(id);
 
     userModel.findByIdAndUpdate(id, req.body, (err) => {
@@ -69,6 +70,29 @@ exports.editUser =  (req,res) => {
     });
 }
 
+/* Edit users Profile */
+exports.editImg = (req,res) => {
+    console.log('update');
+    const id = req.params.id;
+    let profileImg = '';
+    if(req.file) {
+        console.log(req.file.path);
+        profileImg = req.file.path;
+    } else {
+        profileImg = req.body.profileImg;
+    }
+    console.log(id,profileImg);
+    // const price = req.body.price;
+    userModel.findByIdAndUpdate(id,{ profileImg }, (err,result) => {
+        if(err){
+            res.send({status: 500, message:'Unable to Update Profile Image' });
+        }
+        else{
+            res.status(200).json(result);
+            // res.send({status: 200, message:'Update product successfully'});
+        }
+    });
+}
 
 /* Delete user by id. */
 exports.deleteUser = (req, res, next) => {

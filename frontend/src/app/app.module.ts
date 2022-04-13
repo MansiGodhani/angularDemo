@@ -15,6 +15,7 @@ import { AdminLoginComponent } from './components/admin-login/admin-login.compon
 import { HeaderComponent } from './components/header/header.component';
 import { UsersComponent } from './components/admindashboard/users/users.component';
 import { AddtocartComponent } from './components/addtocart/addtocart.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { AddtocartComponent } from './components/addtocart/addtocart.component';
     AdminLoginComponent,
     HeaderComponent,
     UsersComponent,
-    AddtocartComponent
+    AddtocartComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

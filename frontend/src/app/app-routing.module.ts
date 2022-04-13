@@ -9,6 +9,7 @@ import {RegisterComponent} from "./components/register/register.component";
 import {AdminLoginComponent} from "./components/admin-login/admin-login.component";
 import {UsersComponent} from "./components/admindashboard/users/users.component";
 import {AddtocartComponent} from "./components/addtocart/addtocart.component";
+import {ProfileComponent} from "./components/profile/profile.component";
 
 const routes: Routes = [
   { path: '', component: LoginComponent},
@@ -16,6 +17,7 @@ const routes: Routes = [
   // { path: 'login/admin', component: AdminLoginComponent },
   { path:'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent, canActivate:[AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate:[AuthGuard] },
   { path: 'addToCart', component: AddtocartComponent, canActivate:[AuthGuard] }
 
   // {

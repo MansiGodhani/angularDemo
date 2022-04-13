@@ -40,7 +40,7 @@ export class EditUserComponent implements OnInit {
     // console.log('Form Editted..', this.editForm.value);
     this.userService.editUser(this.id, this.editForm.value).subscribe(
       (result) => {
-        // console.log("Upadated Successfully..",result);
+        // console.log("Updated Successfully..",result);
         this.router.navigate(['admin/users'])
       }
     )

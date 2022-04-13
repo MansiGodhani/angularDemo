@@ -160,19 +160,5 @@ export class AuthService {
     return this.http.get(baseUrl + 'api/users/totalUsers');
   }
 
-  isActiveCheck(){
-    let accessToken = localStorage.getItem('accessToken');
-     let data =jwt_decode(accessToken);
-      console.log(data['isActive']);
-    // if(data['isRole']=="USER"){
-    //   console.log('user log in');
-    //   this.router.navigate(['/home']);
-    // }else if(data['isRole']=="ADMIN"){
-    //   this.router.navigate(['/admin']);
-    //   console.log('admin login')
-    // }
-
-  }
-
 }
 
