@@ -12,6 +12,7 @@
 <ul>
 	<li>Register & Login.</li>
 	<li>View All products list.</li>
+	<li>View Profile and Edit Profile Image.</li>
 	<li>Add product in Shopping Cart.</li>
 	<li>Update product Quantity.</li>
 	<li>Display all cart item & Price Details.</li>
