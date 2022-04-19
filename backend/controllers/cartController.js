@@ -20,6 +20,7 @@ exports.editCart = async (req, res) => {
     try{
         const id = req.params.id;
         // console.log(id);
+
         cartModel.findByIdAndUpdate(id, req.body, (err) => {
             if(err){
                 res.send({status: 500, message:'Unable to Update User' });
