@@ -19,6 +19,7 @@ export class AuthService {
   constructor(  private http: HttpClient, private router: Router ) {
     const accessToken = localStorage.getItem('accessToken');
     const adminToken = localStorage.getItem('adminToken');
+
     if(accessToken) {
       this.userSubject.next(jwt_decode(accessToken));
     }
